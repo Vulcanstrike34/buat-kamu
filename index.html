@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Karena Kamu 🫶</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <style>
+        body {
+            font-family: 'Handlee', cursive;
+            text-align: center;
+            background: url('https://feeldreams.github.io/nightin.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        p {
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        /* Tombol Mulai */
+        #startButton {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            background: pink;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #startButton:hover {
+            background: #ff69b4;
+            transform: scale(1.1);
+        }
+        /* Animasi Love */
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: red;
+            animation: floatUp 2s ease-in-out forwards;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-100px) scale(1.5); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Sentuh untuk Mulai 💐</h1>
+    <button id="startButton">💖 Mulai 💖</button>
+
+    <div class="container">
+        <p id="message_1"></p>
+        <p id="message_2"></p>
+        <p id="message_3"></p>
+        <p id="message_4"></p>
+        <p id="message_5"></p>
+        <p id="message_6"></p>
+        <p id="message_7"></p>
+        <p id="message_8"></p>
+    </div>
+
+    <!-- Audio -->
+    <audio id="backgroundMusic" src="https://htmlku.com/karnakamu/karnakamu.mp3"></audio>
+
+    <script>
+        document.getElementById("startButton").addEventListener("click", function(event) {
+            let audio = document.getElementById("backgroundMusic");
+            audio.play();
+
+            let messages = [
+                { id: "message_1", text: "Karena kamu <b>cantik</b> 🫶", delay: 3000 },
+                { id: "message_2", text: "Kan kuberi segalanya<br>Apa yang ku punya 🩷", delay: 7000 },
+                { id: "message_3", text: "Dan hatimu baik,", delay: 11000 },
+                { id: "message_4", text: "Sempurnalah duniaku<br>saat kau di sisiku 🫠", delay: 15000 },
+                { id: "message_5", text: "<br>Bukan karena <i>make up</i> di wajahmu,", delay: 20000 },
+                { id: "message_6", text: "Atau lipstik merah itu,", delay: 24000 },
+                { id: "message_7", text: "Lembut hati tutur kata,", delay: 28000 },
+                { id: "message_8", text: "Terciptalah cinta yang kupuja 🫶<br><br><b>😍🥰🫣💗</b>", delay: 32000 }
+            ];
+
+            messages.forEach(msg => {
+                setTimeout(() => {
+                    let el = document.getElementById(msg.id);
+                    if (el) {
+                        el.innerHTML = msg.text;
+                        el.style.opacity = "1";
+                    }
+                }, msg.delay);
+            });
+
+            // Animasi Love saat diklik
+            for (let i = 0; i < 5; i++) {
+                createHeart(event.clientX, event.clientY);
+            }
+
+            this.style.display = "none"; // Sembunyikan tombol setelah ditekan
+        });
+
+        function createHeart(x, y) {
+            let heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            document.body.appendChild(heart);
+
+            // Atur posisi love sesuai tempat klik
+            heart.style.left = `${x + (Math.random() * 50 - 25)}px`;
+            heart.style.top = `${y + (Math.random() * 50 - 25)}px`;
+
+            // Hapus setelah animasi selesai
+            setTimeout(() => { heart.remove(); }, 2000);
+        }
+    </script>
+
+</body>
+</html>
